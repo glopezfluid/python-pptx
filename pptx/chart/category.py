@@ -25,7 +25,21 @@ class Categories(Sequence):
         self._xChart = xChart
 
     def __getitem__(self, idx):
-        raise NotImplementedError
+        pt = self._xChart.cat_pts[idx]
+        return Category(pt)
 
     def __len__(self):
         return len(self._xChart.cat_pts)
+
+
+class Category(str):
+    """
+    A sequence of |Category| objects, each representing a category label on
+    the chart. Provides properties for dealing with hierarchical categories.
+    """
+    def __new__(cls, pt, *args):
+        category_label = pt.v.text
+        return str.__new__(cls, category_label)
+
+    def __init__(self, pt):
+        self._element = self._pt = pt

@@ -224,3 +224,20 @@ A ``<c:cat>`` element is of the ``CT_AxDataSource`` type::
       <xsd:element name="extLst"  type="CT_ExtensionList" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
+
+  <xsd:complexType name="CT_Lvl">
+    <xsd:sequence>
+      <xsd:element name="pt" type="CT_StrVal" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="CT_StrVal">
+    <xsd:sequence>
+      <xsd:element name="v" type="s:ST_Xstring"/>
+    </xsd:sequence>
+    <xsd:attribute name="idx" type="xsd:unsignedInt" use="required"/>
+  </xsd:complexType>
+
+  <xsd:simpleType name="ST_Xstring">
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>

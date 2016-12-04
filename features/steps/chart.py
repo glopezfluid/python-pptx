@@ -880,6 +880,12 @@ def then_bubble_plot_bubble_scale_is_value(context, value):
     )
 
 
+@then('categories[2] == \'Baz\'')
+def then_categories_2_is_Baz(context):
+    value = context.categories[2]
+    assert value == 'Baz', 'got %s' % value
+
+
 @then('categories[2] is a Category object')
 def then_categories_2_is_a_Category_object(context):
     type_name = type(context.categories[2]).__name__
