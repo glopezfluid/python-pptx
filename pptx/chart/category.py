@@ -12,8 +12,10 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals
 )
 
+from collections import Sequence
 
-class Categories(object):
+
+class Categories(Sequence):
     """
     A sequence of |Category| objects, each representing a category label on
     the chart. Provides properties for dealing with hierarchical categories.
@@ -21,3 +23,9 @@ class Categories(object):
     def __init__(self, xChart):
         super(Categories, self).__init__()
         self._xChart = xChart
+
+    def __getitem__(self, idx):
+        raise NotImplementedError
+
+    def __len__(self):
+        return len(self._xChart.cat_pts)

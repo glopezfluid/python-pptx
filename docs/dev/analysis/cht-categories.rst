@@ -78,6 +78,18 @@ XML semantics
   value. A non-leaf category spans from the leaf node having the matching idx
   to the last leaf node not contained in its subsequent sibling.
 
+* The idx value on each `<c:pt>` element identifies the element for possible
+  overrides, like manual positioning or deletion (hiding). It may also key it
+  to the values in the series and/or other items; the spec is silent on these
+  details.
+
+* I can't find a way to set the `c:noMultiLvlLbl` element truthy using the UI.
+  I suspect this is only an Excel option.
+
+* The `c:lvl` element does not appear when there is only a single level of
+  categories. Also in that case, a `c:strCache` element contains the `c:pt`
+  elements rather than a `c:multiLvlStrCache` element.
+
 Q. What behavior is produced by a truthy value in
    `c:catAx/c:noMultiLvlLbl/@val` when there are multiple levels of categories
    defined?
@@ -89,7 +101,30 @@ XML specimens
 
 .. highlight:: xml
 
-::
+Single-level categories (common case)::
+
+  <c:cat>
+    <c:strRef>
+      <c:f>Sheet1!$A$2:$A$5</c:f>
+      <c:strCache>
+        <c:ptCount val="4"/>
+        <c:pt idx="0">
+          <c:v>Category 1</c:v>
+        </c:pt>
+        <c:pt idx="1">
+          <c:v>Category 2</c:v>
+        </c:pt>
+        <c:pt idx="2">
+          <c:v>Category 3</c:v>
+        </c:pt>
+        <c:pt idx="3">
+          <c:v>Category 4</c:v>
+        </c:pt>
+      </c:strCache>
+    </c:strRef>
+  </c:cat>
+
+Multi-level categories::
 
   <c:cat>
      <c:multiLvlStrRef>

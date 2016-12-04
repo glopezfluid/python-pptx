@@ -24,7 +24,8 @@ class BaseChartElement(BaseOxmlElement):
         """
         The sequence of ``<c:pt>`` elements under the ``<c:cat>`` element of
         the first series in this xChart element, ordered by the value of
-        their ``idx`` attribute.
+        their ``idx`` attribute. Only those in the first ``<c:lvl>`` element
+        are included in the case of multi-level categories.
         """
         cat_pts = self.xpath('./c:ser[1]/c:cat//c:lvl[1]/c:pt')
         if not cat_pts:
