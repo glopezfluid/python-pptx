@@ -25,7 +25,8 @@ class CT_AxDataSource(BaseOxmlElement):
         """
         Return a list containing the `c:lvl` descendent elements in document
         order. These will only be present when the required single child
-        is a `c:multiLvlStrRef` element.
+        is a `c:multiLvlStrRef` element. Returns an empty list when no
+        `c:lvl` descendent elements are present.
         """
         return self.xpath('.//c:lvl')
 
@@ -53,6 +54,14 @@ class CT_DPt(BaseOxmlElement):
         dPt = OxmlElement('c:dPt')
         dPt.append(OxmlElement('c:idx'))
         return dPt
+
+
+class CT_Lvl(BaseOxmlElement):
+    """
+    ``<c:lvl>`` custom element class used in multi-level categories to
+    specify a level of hierarchy.
+    """
+    pt = ZeroOrMore('c:pt', successors=())
 
 
 class CT_NumDataSource(BaseOxmlElement):
