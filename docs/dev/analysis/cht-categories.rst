@@ -19,6 +19,18 @@ Caveats
   expected. At the same time, I expect it will work exactly as expected for
   99.9% of the cases, maybe 99.99%.
 
+* Categories are not enforced to be strictly hierarchical. So if a higher-level
+  category "breaks" (gets a new value) without also a new value at the next
+  level, the results might be a little weird. Like changing from USA to Canada,
+  but leaving NY as the state (by leaving that cell blank).
+
+  Basically, the meaning of a structure like this is ambiguous. PowerPoint
+  interprets it without error and python-pptx interprets it without error, but
+  the results might not exactly match up. PowerPoint seems to take the senior
+  category break and show the intermediate category as blank or 'None'. But
+  I suppose it could be interpreted as the senior category just splits
+  a subordinate one; it's open to some question.
+
 
 Multilevel Categories
 ---------------------
@@ -195,7 +207,8 @@ Related Schema Definitions
 
 .. highlight:: xml
 
-A ``<c:cat>`` element is of the ``CT_AxDataSource`` type::
+A ``<c:cat>`` element is a child of a ``<c:ser>`` (series) element and is of
+the ``CT_AxDataSource`` type::
 
   <xsd:complexType name="CT_AxDataSource">
     <xsd:sequence>

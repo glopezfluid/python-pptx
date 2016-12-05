@@ -31,6 +31,31 @@ class Categories(Sequence):
     def __len__(self):
         return len(self._xChart.cat_pts)
 
+    @property
+    def depth(self):
+        """
+        Return an integer representing the number of hierarchical levels in
+        this collection. Returns 1 for non-hierarchical categories and 0 if
+        no categories are present (generally meaning no series are present).
+        """
+        cat = self._cat
+        if cat is None:
+            return 0
+        if cat.multiLvlStrRef is None:
+            return 1
+        return len(cat.lvls)
+
+    @property
+    def _cat(self):
+        """
+        Return the `c:cat` element of the first series in xChart or |None| if
+        not present.
+        """
+        sers = self._xChart.sers
+        if not sers:
+            return None
+        return sers[0].cat
+
 
 class Category(str):
     """
